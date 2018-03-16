@@ -3,7 +3,7 @@
  * Plugin Name: Splat's Contents Page
  * Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
  * Description: To provide a contents page based on categories
- * Version: 0.5
+ * Version: 0.6
  * Author: Splat
  * Author URI: http://kiwiheretic.com/
  * License: GPL2
@@ -72,10 +72,28 @@ function contents_shortcode($atts) {
            foreach ($posts_array as $elmt) {
              $post_title = htmlentities($elmt->post_title);
              $id = $elmt->ID;
+             $last_modified = date_create($elmt->post_modified_gmt);
+             if (!$last_modified) {
+                 $e = date_get_last_errors();
+                 foreach ($e['errors'] as $error) {
+                     echo "$error\n";
+                 }
+             }
+             $curr_date = date_create(gmdate("Y-m-d H:i:s"));
+             $dtdiff = date_diff($curr_date, $last_modified, TRUE);
+             $days = $dtdiff->days;
+             $last_modified = ($elmt->post_modified_gmt);
              $permalink = get_permalink( $id );
+             if ($days < 30) {
+                $recent = "<span class=\"recent-update\">(recently updated)</span>";
+             } else {
+                $recent = "";
+             }   
+            
         $str1 = <<<EOT
              <li>
              <a href="$permalink">$post_title</a>
+             $recent
              </li>
              
 EOT;

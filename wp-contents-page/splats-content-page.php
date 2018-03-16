@@ -5,14 +5,14 @@
  * Description: To provide a contents page based on categories
  * Version: 0.5
  * Author: Splat
- * Author URI: http://blog.splats-vps.info/
+ * Author URI: http://kiwiheretic.com/
  * License: GPL2
  */
  
  /*
-DEMO List Posts (Wordpress Plugin)
-Copyright (C) 2009 Paul McKnight
-Contact me at http://www.reallyeffective.co.uk
+Contents Page (Wordpress Plugin)
+Copyright (C) 2016 @kiwiheretic
+Contact me at kiwiheretic@myself.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-//tell wordpress to register the demolistposts shortcode
+//tell wordpress to register the contents-page shortcode
 add_shortcode("splats-contents", "contents_shortcode");
 
 function contents_shortcode($atts) {
@@ -101,11 +101,5 @@ EOT;
   return $contents_output;
 }
 
-function contents_function() {
-  //process plugin
-  $demolp_output = "Hello World!";
-  //send back text to calling function
-  return $demolp_output;
-}
 
  ?>
